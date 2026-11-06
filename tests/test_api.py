@@ -59,3 +59,10 @@ def test_filter_done(client):
 
 def test_filter_done_invalid(client):
     assert client.get("/tasks?done=talvez").status_code == 400
+
+
+
+def test_index_lists_task_by_id(client):
+    result = client.get("/")
+    assert result.status_code == 200
+    assert "/tasks/<id>" in result.json["endpoints"]
